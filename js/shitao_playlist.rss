@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:jwplayer="http://rss.jwpcdn.com/">
+<channel>
+
+  <item>
+    <title>【今日点击】视频1</title>
+    <description>视频1描述</description>
+    <jwplayer:image>/mobile/jwplayer/shitao.jpg</jwplayer:image>
+    <jwplayer:source file="/videos/shitao/JRDJ_ZM-185_02-16-2013_P641320.mp4" />
+  </item>
+  <item>
+    <title>【石涛评述】视频2</title>
+    <description>视频2描述</description>
+    <jwplayer:image>/mobile/jwplayer/shitao.jpg</jwplayer:image>
+    <jwplayer:source file="/videos/shitao/JRDJ_ZM-186_02-23-2013_P641325.mp4" />
+  </item>
+
+</channel>
+</rss>

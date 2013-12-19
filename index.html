@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="icon.png">
+	<link rel="Bookmark" href="icon.png">
+    <title>&#x4F60;&#x6211;&#x6709;&#x7F18;</title>
+	<link type="text/css" rel="stylesheet" href="./css/jquery.mobile-1.3.1.min.css">
+	<link type="text/css" rel="stylesheet" href="./css/jqm-demos.css">
+	<script type="text/javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" src="./js/index.js"></script>
+	<script type="text/javascript" src="./js/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="./jwplayer/jwplayer.js"></script>
+	<script type="text/javascript" src="./jwplayer/jwplayer.html5.js"></script>
+	<script type="text/javascript" src="./js/image.js"></script>
+
+	<script type="text/css">
+	
+	@font-face {
+		font-family: 'Open Sans'
+		font-style: normal
+		font-weight: 300
+		src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff')
+	}
+	@font-face {
+		font-family: 'Open Sans'
+		font-style: normal
+		font-weight: 400
+		src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff')
+	}
+	@font-face {
+		font-family: 'Open Sans'
+		font-style: normal
+		font-weight: 700
+		src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff')
+	}
+	</script>
+	<style>
+		/* Adjust the width of the left reveal menu.
+		Copy all CSS from jquery.mobile.panel.css and delete the properties other than width, left, right and transform.
+		Then delete the selectors/rules for display modes (reveal/push/overlay) and the position (left/right) that you don't use.
+		If you don't use fixed toolbars on your page you can delete those selectors as well.
+		Narrow the scope of the selectors to prevent other panels being affected by the overrides. */
+		#demo-page #left-panel.ui-panel {
+			width: 15em;
+		}
+		#demo-page #left-panel.ui-panel-closed {
+			width: 0;
+		}
+		#demo-page .ui-panel-position-left.ui-panel-display-reveal {
+			left: 0;
+		}
+		#demo-page .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
+		.ui-panel-dismiss-position-left.ui-panel-dismiss-open {
+			left: 15em;
+			right: -15em;
+		}
+		#demo-page .ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal {
+			left: 0;
+			right: 0;
+			-webkit-transform: translate3d(15em,0,0);
+			-moz-transform: translate3d(15em,0,0);
+			transform: translate3d(15em,0,0);
+		}
+
+		/* Combined listview collapsible menu. */
+		/* Unset negative margin bottom on the listviews. */
+		#left-panel .ui-panel-inner > .ui-listview { margin-bottom: 0; }
+		/* Unset top and bottom margin on collapsible set. */
+		#left-panel .ui-collapsible-set { margin: 0; }
+		/* The first collapsible contains the collapsible set. Make it fit exactly in the collapsible content. */
+		#left-panel .ui-panel-inner > .ui-collapsible > .ui-collapsible-content { padding-top: 0; padding-bottom: 0;  border-bottom: none; }
+		/* Remove border top if a collapsible comes after a listview. */
+		#left-panel .ui-panel-inner  > .ui-collapsible > .ui-collapsible-heading .ui-btn,
+		#left-panel .ui-collapsible.ui-first-child .ui-collapsible-heading .ui-btn { border-top: none; }
+		/* Give the first collapsible heading the same padding, i.e. same height, as the list items. */
+		#left-panel .ui-collapsible-heading .ui-btn-inner { padding: .7em 40px .7em 15px; }
+		/* Give the other collapsible headings the same padding and font-size as the list divider. */
+		#left-panel .ui-collapsible-set .ui-collapsible-heading .ui-btn-inner { padding: .5em 40px .5em 15px; font-size: 14px; }
+
+		/* Styling of the close button in both panels. */
+		#demo-page .ui-panel-inner > .ui-listview .ui-first-child {
+			background: #eee;
+		}
+
+		/* Reveal menu shadow on top of the list items */
+		#demo-page .ui-panel-display-reveal {
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+		}
+		#demo-page .ui-panel-content-wrap-position-left {
+			-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+			-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+			box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+		}
+
+		/* Use the ui-body class of your page theme (ui-body-d in this demo) to set a background image.
+		This class will be added to the content wrapper, while the page itself gets the same background
+		as the panel before opening the panel. */
+		#demo-page .ui-body-d {
+			background-image: url(./bg-pattern.png);
+			background-repeat: repeat-x;
+			background-position: left bottom;
+		}
+
+		/* Styling of the page contents */
+		.article div {
+			//padding: 5px;
+		}
+		.article p {
+			margin: 0 0 1em;
+			line-height: 1.5;
+		}
+		.article p img {
+			max-width: 100%;
+		}
+		.article p:first-child {
+			text-align: center;
+		}
+		.article small {
+			display: block;
+			font-size: 75%;
+			color: #c0c0c0;
+		}
+		.article p:last-child {
+			text-align: right;
+		}
+		.article a.ui-btn {
+			//margin-right: 2em;
+			-webkit-border-radius: .4em;
+			border-radius: .4em;
+		}
+		@media all and (min-width:769px) {
+			.article {
+				margin: 0 auto;
+			}
+			/* Fix for issue with buttons and form elements
+			if CSS columns are used on a page with a panel. */
+			.article a.ui-btn {
+				-webkit-transform: translate3d(0,0,0);
+			}
+		}
+	</style>
+</head>
+<body>
+<div data-role="page" id="demo-page" data-theme="d">
+
+    <div data-role="header" data-theme="c">
+        <h1 id="videoTitle">&#x4F60;&#x6211;&#x6709;&#x7F18;</h1>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+    </div><!-- /header -->
+
+    <div data-role="content">
+<!--
+-->
+    	<div class="article">
+            <div id="videoDetail"></div><br>
+			<!--&#x64AD;&#x653E;&#x5668;&#x5F00;&#x59CB;-->
+			<div id="videoField"></div><br>
+			<div><a id="btn_pause" class="jqm-button ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c" data-role="button" data-inline="true" data-theme="c"><span class="ui-btn-inner">&#x6682;&#x505C;&nbsp/&nbsp&#x64AD;&#x653E;</span></a>
+			<a id="btn_stop" class="jqm-button ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c" data-role="button" data-inline="true" data-theme="c"><span class="ui-btn-inner">&nbsp&#x505C;&#x3000;&#x6B62;&nbsp</span></a>
+			<a href="#left-panel" class="jqm-button ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c" data-role="button" data-inline="true" data-theme="c"><span class="ui-btn-inner">&#x8FD4;&#x56DE;&#x83DC;&#x5355;</span></a></div><br>
+			<!--&#x64AD;&#x653E;&#x5668;&#x7ED3;&#x675F;-->
+
+		</div><!-- /article -->
+<!--
+-->
+    </div><!-- /content -->
+
+    <div data-role="panel" id="left-panel" data-theme="c">
+
+        <ul data-role="listview" data-theme="d">
+        	<li data-icon="delete"><a href="#" data-rel="close"><b>&#x89C6;&#x9891;&#x70B9;&#x64AD;</b></a></li>
+            <li><a href="#left-panel" id="btn_zifen">&#x5929;&#x5B89;&#x95E8;&#x81EA;&#x711A;&#x771F;&#x76F8;</a></li>
+            <li><a href="#left-panel" id="btn_tongxin">&#x201C;&#x5168;&#x4E16;&#x754C;&#x90FD;&#x77E5;&#x9053;&#xFF01;&#x201D;</a></li>
+            <li><a href="#left-panel" id="btn_fengyu">4.25&#x4E2D;&#x5357;&#x6D77;&#x4E0A;&#x8BBF;&#x771F;&#x76F8;</a></li>
+            <li><a href="#left-panel" id="btn_lijie">&#x98CE;&#x96E8;&#x5929;&#x5730;&#x884C;&#x4E4B;-&#x5386;&#x52AB;</a></li>
+            <li><a href="#left-panel" id="btn_pw720">&#x7834;&#x96FE;-&#x8D70;&#x8FC7;&#x4E03;&#x4E8C;&#x96F6;</a></li>
+        </ul>
+
+        <div data-role="collapsible" data-inset="false" data-iconpos="right" data-theme="d" data-content-theme="d">
+		
+          <h3><b>&#x66F4;&#x591A;&#x89C6;&#x9891;&#x2026;</b></h3>
+
+          <div data-role="collapsible-set" data-inset="false" data-iconpos="right" data-theme="b" data-content-theme="d">
+
+            <div data-role="collapsible">
+
+              <h3>&#x660E;&#x6167;&#x5341;&#x65B9;</h3>
+
+              <ul data-role="listview">
+                <li><a href="#left-panel" id="btn_yehao">&#x8D70;&#x51FA;&#x653F;&#x6CBB;&#xFF0C;&#x8D70;&#x5165;&#x4FEE;&#x70BC;</a></li>
+                <li><a href="#left-panel" id="btn_kevin">&#x4ECE;&#x897F;&#x65B9;&#x5230;&#x4E1C;&#x65B9;</a></li>
+                <li><a href="#left-panel" id="btn_pingfan">&#x5E73;&#x51E1;&#x4E0D;&#x5E73;&#x51E1;</a></li>
+              </ul>
+
+            </div><!-- /collapsible -->
+
+            <div data-role="collapsible">
+
+              <h3>&#x4E16;&#x4E8B;&#x5173;&#x5FC3;</h3>
+
+              <ul data-role="listview">
+                <li><a href="#left-panel" id="btn_sszj">&#x6D3B;&#x6458;&#x5668;&#x5B98;&#x9ED1;&#x5E55;</a></li>
+                <li><a href="#left-panel" id="btn_future">&#x672A;&#x6765;&#x4EBA;&#x7684;&#x795E;&#x8BDD;&#x6545;&#x4E8B;</a></li>
+                <li><a href="#left-panel" id="btn_305">&#x6C38;&#x6052;&#x7684;&#x7535;&#x6CE2;</a></li>
+                <li><a href="#left-panel" id="btn_2009">&#x6CD5;&#x8F6E;&#x5927;&#x6CD5;&#x6D2A;&#x4F20;&#x4E16;&#x754C;</a></li>
+                <li><a href="#left-panel" id="btn_gzs">&#x4E2D;&#x56FD;&#x7684;&#x826F;&#x5FC3;</a></li>
+              </ul>
+
+            </div><!-- /collapsible -->
+
+            <div data-role="collapsible">
+
+              <h3>&#x5F71;&#x89C6;&#x6587;&#x827A;</h3>
+
+              <ul data-role="listview">
+                <li><a href="#left-panel" id="btn_zhenhan">&#x7535;&#x5F71;-&#x9707;&#x64BC;</a></li>
+                <li><a href="#left-panel" id="btn_sy">&#x795E;&#x97F5;&#x4E16;&#x754C;&#x5DE1;&#x56DE;&#x4E13;&#x8F91;</a></li>
+                <li><a href="#left-panel" id="btn_lotus">&#x97F3;&#x4E50;&#x52A8;&#x753B;</a></li>
+                <li><a href="#left-panel" id="btn_cyss">&#x7EAA;&#x5B9E;&#x6587;&#x5B66;-&#x7A7F;&#x8D8A;&#x751F;&#x6B7B;</a></li>
+              </ul>
+
+            </div><!-- /collapsible -->
+
+		  </div><!-- /collapsible-set -->
+
+  		</div><!-- /collapsible -->
+
+    </div><!-- /panel -->
+
+</div><!-- /page -->
+</body>
+</html>
